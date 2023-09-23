@@ -23,7 +23,7 @@ const Signup = () => {
         }
         else if(res.data==="notexist"){
           successNotification()
-          history("/home",{state:{id:email}})
+          history("/",{state:{id:email}})
         }
       })
       .catch(e=>{
@@ -59,7 +59,7 @@ const Signup = () => {
 
 
   return (
-    <div className='login'>
+    <div className='signup'>
     
       <h1>Signup</h1>
       <form action="POST">
@@ -70,7 +70,7 @@ const Signup = () => {
       <br />
       <p>OR</p>
       <br />
-      <Link to="/">Login</Link>
+      <Link to="/login">Login</Link>
     </div>
   )
 }

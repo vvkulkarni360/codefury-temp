@@ -5,7 +5,6 @@ import addNotification from 'react-push-notification'
 
 
 const Login = () => {
-  console.log("HELLO")
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -15,13 +14,13 @@ const Login = () => {
   async function submit(e){
     e.preventDefault()
     try {
-      await axios.post("http://localhost:8000/",{
+      await axios.post("http://localhost:8000/login",{
         email,password
       })
       .then(res=>{
         if(res.data==="login success"){
           successNotification()
-          history("/home",{state:{id:email}})
+          history("/",{state:{id:email}})
         }
         else if(res.data==="wrong password"){
           warningNotification()
