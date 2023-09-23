@@ -2,6 +2,8 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import addNotification from 'react-push-notification'
 import { Link, useNavigate } from 'react-router-dom'
+import './signup.css';
+
 
 const Signup = () => {
   const [email, setEmail] = useState('')
@@ -23,7 +25,7 @@ const Signup = () => {
         }
         else if(res.data==="notexist"){
           successNotification()
-          history("/",{state:{id:email}})
+          history("/home",{state:{id:email}})
         }
       })
       .catch(e=>{
@@ -59,18 +61,24 @@ const Signup = () => {
 
 
   return (
-    <div className='signup'>
+    <div className='card'>
     
-      <h1>Signup</h1>
-      <form action="POST">
-        <input type="email" onChange={(e) => { setEmail(e.target.value) }} placeholder='Email' />
-        <input type="password" onChange={(e) => { setPassword(e.target.value) }} placeholder='Password' />
-        <input type="submit" onClick={submit} />
+    <Link className="singup">Sign Up</Link>
+        <form action="POST">
+        <div className="inputBox">
+        <input type="email" onChange={(e) => { setEmail(e.target.value) }} required="required"/>
+        <span class="user">Email</span> 
+        </div>
+        <div className="inputBox">
+        <input type="password" onChange={(e) => { setPassword(e.target.value) }}  required="required" />
+        <span>Password</span>
+        </div>
+        <button className='enter' type="submit" onClick={submit} >Enter</button>
       </form>
       <br />
       <p>OR</p>
       <br />
-      <Link to="/login">Login</Link>
+      <Link to="/">Login</Link>
     </div>
   )
 }
