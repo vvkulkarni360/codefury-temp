@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import addNotification from 'react-push-notification'
+
 
 const Login = () => {
   console.log("HELLO")
@@ -18,23 +20,48 @@ const Login = () => {
       })
       .then(res=>{
         if(res.data==="login success"){
+          successNotification()
           history("/home",{state:{id:email}})
         }
         else if(res.data==="wrong password"){
-          alert("wrong password")
+          warningNotification()
+          // alert("wrong password")
         }
         else {
-          alert("user does not exist")
+          // alert("user does not exist")
+          warningNotification()
         }
       })
       .catch(e=>{
-        alert("wrong details")
+        warningNotification()
+        // alert("wrong details")
         console.log(e)
       })
     } catch (error) {
+      warningNotification()
       console.log(error)
     }
   }
+  function warningNotification (){
+    addNotification({
+      title: 'Warning',
+      subtitle: 'Not permitted',
+      message: 'Enter valid credentials',
+      theme: 'red',
+      closeButton:"X",
+    })
+  };
+  function successNotification (){
+    addNotification({
+      title: 'Success',
+      subtitle: 'Hello',
+      message: 'Logged in successfully',
+      theme: 'light',
+      closeButton:"X",
+      backgroundTop:"green",
+      backgroundBottom:"yellowgreen"
+    })
+  };
 
 
 

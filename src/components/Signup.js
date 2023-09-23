@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import addNotification from 'react-push-notification'
 import { Link, useNavigate } from 'react-router-dom'
 
 const Signup = () => {
@@ -17,25 +18,49 @@ const Signup = () => {
       .then(res=>{
         console.log(res)
         if(res.data==="exist"){
-          alert("user already exist")
+          warningNotification()
+          // alert("user already exist")
         }
         else if(res.data==="notexist"){
+          successNotification()
           history("/home",{state:{id:email}})
         }
       })
       .catch(e=>{
-        alert("wrong details")
+        warningNotification()
+        // alert("wrong details")
         console.log(e)
       })
     } catch (error) {
+      warningNotification()
       console.log(error)
     }
   }
-
+  function warningNotification (){
+    addNotification({
+      title: 'Warning',
+      subtitle: 'Use different email',
+      message: 'Email exist',
+      theme: 'red',
+      closeButton:"X",
+    })
+  };
+  function successNotification (){
+    addNotification({
+      title: 'Success',
+      subtitle: 'Hello!',
+      message: 'Signup successful',
+      theme: 'light',
+      closeButton:"X",
+      backgroundTop:"green",
+      backgroundBottom:"yellowgreen"
+    })
+  };
 
 
   return (
     <div className='login'>
+    
       <h1>Signup</h1>
       <form action="POST">
         <input type="email" onChange={(e) => { setEmail(e.target.value) }} placeholder='Email' />
