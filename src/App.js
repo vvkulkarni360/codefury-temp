@@ -5,6 +5,8 @@ import Home from "./components/Home";
 
 
 function App() {
+  
+
   return (
     <Router>
       <div className="App">
@@ -12,6 +14,7 @@ function App() {
           <Route path="/" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/home" element={<Home />}></Route>
+          
         </Routes>
       </div>
     </Router>
@@ -19,3 +22,5 @@ function App() {
 }
 
 export default App;
+
+
